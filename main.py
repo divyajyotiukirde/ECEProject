@@ -30,7 +30,7 @@ if __name__ == '__main__':
     # update a,b values
     a,b = 0.007, 0.03
 
-    controller_instance = PIDController(a,b,1)
+    controller_instance = PIDController(a,b,0)
     max_pods = []
 
     job_id = 0
@@ -50,6 +50,8 @@ if __name__ == '__main__':
             if pods > len(jobs):
                 for job in jobs:
                     print("on job id: ", job_id)
+                    if job_id >= len(jobs):
+                        break
                     job = job.strip()
                     # i/p example stress-ng --io 4 --vm 5 --vm-bytes 2G --timeout 5m
                     # o/p example "--io", "4", "--vm", "5", "--vm-bytes", "2G", "--timeout", "5m"
@@ -62,6 +64,8 @@ if __name__ == '__main__':
                 count=0
                 while job_id < len(jobs):
                     print("on job id: ", job_id)
+                    if job_id >= len(jobs):
+                        break
                     if pods==count:
                         break
                     job = jobs[job_id]
@@ -71,3 +75,4 @@ if __name__ == '__main__':
                     middleware.start_pod(formatted_output, 1)
                     time.sleep(15) # process jobs after every 15s
                     count+=1
+                    job_id+=1
