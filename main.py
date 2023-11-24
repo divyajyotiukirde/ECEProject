@@ -36,7 +36,7 @@ if __name__ == '__main__':
     job_id = 0
 
     while True:
-        cpu = monitor.get_cpu_utilization()
+        cpu = monitor.get_node_cpu_utilization()
         if cpu:
             controller_instance.update_utilization(cpu)
             controller_instance.run_controller()
