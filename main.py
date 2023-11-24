@@ -37,37 +37,33 @@ if __name__ == '__main__':
 
     while True:
         cpu = monitor.get_cpu_utilization()
-        controller_instance.update_utilization(cpu)
-        controller_instance.run_controller()
-        pods = controller_instance.get_number_of_pods()
+        if cpu:
+            controller_instance.update_utilization(cpu)
+            controller_instance.run_controller()
+            pods = controller_instance.get_number_of_pods()
 
-        if job_id >= len(jobs):
-            exit(0)
+            if job_id >= len(jobs):
+                exit(0)
 
-        if pods > len(jobs):
-            for job in jobs:
-                job = job.strip()
-                # i/p example stress-ng --io 4 --vm 5 --vm-bytes 2G --timeout 5m
-                # o/p example "--io", "4", "--vm", "5", "--vm-bytes", "2G", "--timeout", "5m"
-                formatted_output = parse_args(job)
-                # start pod on node 1
-                middleware.start_pod(formatted_output, 1)
-                time.sleep(15) # process jobs after every 15s
-                job_id+=1
-        else:
-            count=0
-            while job_id < len(jobs):
-                if pods==count:
-                    break
-                job = jobs[job_id]
-                job = job.strip()
-                formatted_output = parse_args(job)
-                # start pod on node 1
-                middleware.start_pod(formatted_output, 1)
-                time.sleep(15) # process jobs after every 15s
-                count+=1
-
-
-
-
-    
+            if pods > len(jobs):
+                for job in jobs:
+                    job = job.strip()
+                    # i/p example stress-ng --io 4 --vm 5 --vm-bytes 2G --timeout 5m
+                    # o/p example "--io", "4", "--vm", "5", "--vm-bytes", "2G", "--timeout", "5m"
+                    formatted_output = parse_args(job)
+                    # start pod on node 1
+                    middleware.start_pod(formatted_output, 1)
+                    time.sleep(15) # process jobs after every 15s
+                    job_id+=1
+            else:
+                count=0
+                while job_id < len(jobs):
+                    if pods==count:
+                        break
+                    job = jobs[job_id]
+                    job = job.strip()
+                    formatted_output = parse_args(job)
+                    # start pod on node 1
+                    middleware.start_pod(formatted_output, 1)
+                    time.sleep(15) # process jobs after every 15s
+                    count+=1
