@@ -58,6 +58,7 @@ def start_pod(args, node):
     time.sleep(1)
     result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     print("executed ",result.stdout)
+    time.sleep(1)
 
 
 def kill_pod():
