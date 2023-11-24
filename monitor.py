@@ -35,6 +35,7 @@ def process_node_metrics(node_metrics):
         cpu_usage_nano = int(item['usage']['cpu'].rstrip('n'))
         cpu_usage_milli = cpu_usage_nano / 1e6  # Convert nanocores to millicores
         print(f"Node: {node_name}, CPU Usage: {cpu_usage_milli:.2f} millicores")
+        return cpu_usage_milli
 
 def get_cpu_utilization():
     pod_metrics_url = f"{METRICS_SERVER_URL}/apis/metrics.k8s.io/v1beta1/pods"
@@ -53,6 +54,13 @@ def get_cpu_utilization():
 
     except requests.RequestException as e:
         print(f"Error fetching metrics: {e}")
+
+def get_node_cpu_utilization():
+    node_response = requests.get(node_metrics_url)
+    node_metrics = node_response.json()
+    cpu = process_node_metrics(node_metrics)
+    cpu_capacity = 16000
+    return cpu/cpu_capacity
 
 def main():
     while True:

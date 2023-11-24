@@ -4,9 +4,9 @@ SamplingTime = 1
 class PIDController():
     def __init__( self, a, b, initial_pods ):
 
-        self.kp = 1
-        self.ki = 1
-        self.kd = 1
+        self.kp = -4.496
+        self.ki = 7.543
+        self.kd = 1.746
 
         self.i = 0
         self.d = 0
@@ -31,10 +31,11 @@ class PIDController():
         u = self.kp*err + self.i*self.ki + self.kd*self.d
         self.prev_e = err
         #print(u, yk)
-        if u>self.pod_max:
-            return self.pod_max
+        if u>self.max_pods:
+            self.max_pods = u
+            return self.max_pods
         if u<1:
-            return 0
+            return 1
         return u
     
     def _get_utilization(self):
