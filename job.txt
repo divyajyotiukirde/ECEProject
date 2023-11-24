@@ -1,0 +1,4 @@
+stress-ng --io 1 --vm 1 --vm-bytes 1G --timeout 5m
+stress-ng --io 1 --vm 1 --vm-bytes 2G --timeout 5m
+stress-ng --io 1 --vm 1 --vm-bytes 2G --timeout 5m
+stress-ng --io 1 --vm 1 --vm-bytes 2G --timeout 5m
