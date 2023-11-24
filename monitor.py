@@ -64,10 +64,11 @@ def get_node_cpu_utilization():
     return cpu/cpu_capacity
 
 def main():
-    while True:
-        get_pod_status()
-        get_cpu_utilization()
-        time.sleep(SAMPLING_RATE)
+    # while True:
+    #     get_pod_status()
+    #     get_cpu_utilization()
+    #     time.sleep(SAMPLING_RATE)
+    pass
 
 if __name__ == "__main__":
     main()
