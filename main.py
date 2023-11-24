@@ -36,11 +36,14 @@ if __name__ == '__main__':
     job_id = 0
 
     while True:
-        cpu = monitor.get_node_cpu_utilization()
+        # check for node 1
+        cpu = monitor.get_node_cpu_utilization(1)
         if cpu:
             controller_instance.update_utilization(cpu)
             controller_instance.run_controller()
             pods = controller_instance.get_number_of_pods()
+            print("number of pods: ", pods)
+            print("on job id: ", job_id)
 
             if job_id >= len(jobs):
                 exit(0)
