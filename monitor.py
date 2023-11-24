@@ -56,6 +56,7 @@ def get_cpu_utilization():
         print(f"Error fetching metrics: {e}")
 
 def get_node_cpu_utilization():
+    node_metrics_url = f"{METRICS_SERVER_URL}/apis/metrics.k8s.io/v1beta1/nodes"
     node_response = requests.get(node_metrics_url)
     node_metrics = node_response.json()
     cpu = process_node_metrics(node_metrics)
