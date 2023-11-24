@@ -2,6 +2,7 @@
 # assign job to pod
 
 import subprocess
+import time
 
 # delete completed pods - 
 # kubectl delete pod --field-selector=status.phase==Succeeded
@@ -20,12 +21,12 @@ def generate_random_string(length=4):
     return random_string
 
 
-def write_yaml(args, node, out_file):
+def write_yaml(pod_name, args, node, out_file):
     pod_str = f'''
 apiVersion: v1
 kind: Pod
 metadata:
-  name: stress-pod
+  name: {pod_name}
 spec:
   containers:
   - image: docker.io/polinux/stress-ng:latest
@@ -42,7 +43,7 @@ spec:
       initialDelaySeconds: 30
     args: [{args}]
   nodeSelector:
-    kubernetes.io/hostname: {node}
+    kubernetes.io/hostname: {node_map[node]}
     '''
     with open(out_file, 'w') as f:
         f.write(pod_str)
@@ -51,10 +52,12 @@ spec:
 def start_pod(args, node):
     pod_name = "stress-pod-"+generate_random_string()
     out_file = pod_name + ".yaml"
-    write_yaml(args, node, out_file)
+    write_yaml(pod_name, args, node, out_file)
     command = f"kubectl apply -f {out_file}"
+    print(command)
+    time.sleep(1)
     result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    print(result.stdout)
+    print("executed ",result.stdout)
 
 
 def kill_pod():
