@@ -17,5 +17,12 @@ spec:
         port: 8080
       initialDelaySeconds: 30
     args: ["--io", "2", "--vm", "2", "--vm-bytes", "2G", "--timeout", "5m"]
+    resources:
+      requests:
+        memory: "50Mi"
+        cpu: "500m"
+      limits:
+        memory: "1000Mi"
+        cpu: "2000m"
   nodeSelector:
     kubernetes.io/hostname: node1.group5project.ufl-eel6871-fa23-pg0.utah.cloudlab.us

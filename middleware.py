@@ -16,7 +16,7 @@ import random
 import string
 
 def generate_random_string(length=4):
-    characters = string.ascii_letters + string.digits
+    characters = string.ascii_lowercase + string.digits
     random_string = ''.join(random.choice(characters) for _ in range(length))
     return random_string
 
@@ -42,6 +42,13 @@ spec:
         port: 8080
       initialDelaySeconds: 30
     args: [{args}]
+    resources:
+      requests:
+        memory: "50Mi"
+        cpu: "500m"
+      limits:
+        memory: "1000Mi"
+        cpu: "2000m"
   nodeSelector:
     kubernetes.io/hostname: {node_map[node]}
     '''
@@ -54,11 +61,9 @@ def start_pod(args, node):
     out_file = pod_name + ".yaml"
     write_yaml(pod_name, args, node, out_file)
     command = f"kubectl apply -f {out_file}"
-    print(command)
-    time.sleep(1)
+    time.sleep(2)
     result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     print("executed ",result.stdout)
-    time.sleep(1)
 
 
 def kill_pod():
