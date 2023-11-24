@@ -4,7 +4,7 @@ import sys
 import subprocess
 import time
 import middleware
-# import LocalController
+from LocalController import PIDController
 
 # delete status-completed pods
 def clean_pods():
@@ -17,6 +17,8 @@ if __name__ == '__main__':
     # update a,b values
     a,b = 0.007, 0.03
 
+    controller_instance = PIDController(a,b,1)
+    
     args = sys.argv
     input_file = args[1]
     with open(input_file, 'r') as f:

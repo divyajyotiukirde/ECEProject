@@ -6,6 +6,7 @@ import time
 
 # delete completed pods - 
 # kubectl delete pod --field-selector=status.phase==Succeeded
+# kubectl get pods --no-headers=true | grep "^stress-pod" | awk '{print $1}' | xargs kubectl delete pod
 
 node_map = {
     1: "node1.group5project.ufl-eel6871-fa23-pg0.utah.cloudlab.us",
@@ -28,6 +29,7 @@ kind: Pod
 metadata:
   name: {pod_name}
 spec:
+  restartPolicy: Never
   containers:
   - image: docker.io/polinux/stress-ng:latest
     name: stress-container
@@ -42,13 +44,6 @@ spec:
         port: 8080
       initialDelaySeconds: 30
     args: [{args}]
-    resources:
-      requests:
-        memory: "50Mi"
-        cpu: "500m"
-      limits:
-        memory: "1000Mi"
-        cpu: "2000m"
   nodeSelector:
     kubernetes.io/hostname: {node_map[node]}
     '''
