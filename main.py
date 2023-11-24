@@ -41,15 +41,15 @@ if __name__ == '__main__':
         if cpu:
             controller_instance.update_utilization(cpu)
             controller_instance.run_controller()
-            pods = controller_instance.get_number_of_pods()
+            pods = int(controller_instance.get_number_of_pods())
             print("number of pods: ", pods)
-            print("on job id: ", job_id)
 
             if job_id >= len(jobs):
                 exit(0)
 
             if pods > len(jobs):
                 for job in jobs:
+                    print("on job id: ", job_id)
                     job = job.strip()
                     # i/p example stress-ng --io 4 --vm 5 --vm-bytes 2G --timeout 5m
                     # o/p example "--io", "4", "--vm", "5", "--vm-bytes", "2G", "--timeout", "5m"
@@ -61,6 +61,7 @@ if __name__ == '__main__':
             else:
                 count=0
                 while job_id < len(jobs):
+                    print("on job id: ", job_id)
                     if pods==count:
                         break
                     job = jobs[job_id]
