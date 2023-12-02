@@ -2,7 +2,7 @@
 SamplingTime = 1
 
 class PIDController():
-    def __init__( self, a, b, initial_pods ):
+    def __init__( self, initial_pods ):
 
         self.kp = -4.496
         self.ki = 7.543
@@ -11,8 +11,6 @@ class PIDController():
         self.i = 0
         self.d = 0
         self.prev_e = 0
-        self.a = a
-        self.b = b
 
         self.initial_u = initial_pods
 

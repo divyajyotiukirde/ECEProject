@@ -1,6 +1,4 @@
 import requests
-import time
-import json
 from kubernetes import client, config
 
 # Configuration
@@ -69,12 +67,20 @@ def get_node_cpu_utilization(node):
     cpu_capacity = 16000
     return cpu/cpu_capacity
 
-def main():
-    # while True:
-    #     get_pod_status()
-    #     get_cpu_utilization()
-    #     time.sleep(SAMPLING_RATE)
-    pass
-
-if __name__ == "__main__":
-    main()
+def get_cluster_utilization():
+    node_metrics_url = f"{METRICS_SERVER_URL}/apis/metrics.k8s.io/v1beta1/nodes"
+    node_response = requests.get(node_metrics_url)
+    node_metrics = node_response.json()
+    cpu_capacity = 16000
+    cpu = 0
+    for i in range(len(node_metrics['items'])):
+        if i==0:
+            continue
+        item = node_metrics['items'][i]
+        node_name = item['metadata']['name']
+        cpu_usage_nano = int(item['usage']['cpu'].rstrip('n'))
+        cpu_usage_milli = cpu_usage_nano / 1e6  # Convert nanocores to millicores
+        cpu += (cpu_usage_milli/cpu_capacity)
+    # return overall
+    return cpu/2
+        

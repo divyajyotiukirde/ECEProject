@@ -4,10 +4,6 @@
 import subprocess
 import time
 
-# delete completed pods - 
-# kubectl delete pod --field-selector=status.phase==Succeeded
-# kubectl get pods --no-headers=true | grep "^stress-pod" | awk '{print $1}' | xargs kubectl delete pod
-
 node_map = {
     1: "node1.group5project.ufl-eel6871-fa23-pg0.utah.cloudlab.us",
     2: "node2.group5project.ufl-eel6871-fa23-pg0.utah.cloudlab.us"
