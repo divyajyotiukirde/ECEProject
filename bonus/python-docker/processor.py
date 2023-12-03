@@ -11,7 +11,7 @@ class JobScheduler():
 
     def update_cpu(self, cpu_str):
         cpu = cpu_str.split(',')
-        self.cluster_cpu = int(cpu[0])
+        self.cluster_cpu = float(cpu[0])
         self.node_cpu = cpu[1:]
 
     def add_in_queue(self,job):
@@ -28,7 +28,7 @@ class JobScheduler():
                 if cpu > 0.8:
                     curr_node = 2
 
-                local_cpu = int(self.node_cpu[curr_node])
+                local_cpu = float(self.node_cpu[curr_node])
                 if local_cpu:
                     local_controller.update_utilization(local_cpu)
                     local_controller.run_controller()

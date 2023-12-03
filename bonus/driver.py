@@ -14,9 +14,9 @@ def parse_args(job):
 
 def get_cpu_info():
     cpu_info = []
-    cpu_info.append(monitor.get_cluster_utilization())
-    cpu_info.append(monitor.get_node_cpu_utilization(1))
-    cpu_info.append(monitor.get_node_cpu_utilization(2))
+    cpu_info.append(str(monitor.get_cluster_utilization()))
+    cpu_info.append(str(monitor.get_node_cpu_utilization(1)))
+    cpu_info.append(str(monitor.get_node_cpu_utilization(2)))
     cpu_str = ','.join(cpu_info)
     return cpu_str
 

@@ -6,7 +6,6 @@ RUN apk --no-cache add curl
 COPY ./app.py /app/app.py
 COPY ./LocalController.py /app/LocalController.py
 COPY ./middleware.py /app/middleware.py
-COPY ./monitor.py /app/monitor.py
 COPY ./processor.py /app/processor.py
 COPY script.sh /app/script.sh
 RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
