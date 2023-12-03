@@ -30,7 +30,7 @@ class GlobalPIDController():
         self.d = (err - self.prev_e)/SamplingTime # rate of change of error
         u = self.kp*err + self.i*self.ki + self.kd*self.d
         self.prev_e = err
-        #print(u, yk)
+        print(u, yk)
         if err>0:
             return 1
         if u>2:

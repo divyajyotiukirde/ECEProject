@@ -1,4 +1,5 @@
 import requests
+import subprocess
 from kubernetes import client, config
 
 # Configuration
@@ -83,4 +84,12 @@ def get_cluster_utilization():
         cpu += (cpu_usage_milli/cpu_capacity)
     # return overall
     return cpu/2
-        
+
+def get_active_pods():
+    cmd = f"kubectl get pods --field-selector=status.phase!=Succeeded,status.phase!=Failed | wc -l"
+    result = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    try:
+        if int(result):
+            return int(result)-1
+    except Exception as e:
+        return 0

@@ -33,6 +33,7 @@ if __name__ == '__main__':
             global_controller.run_controller()
             nodes = int(global_controller.get_number_of_nodes())
             print("number of nodes: ", nodes)
+            print("active pods: ", monitor.get_active_pods())
 
             for node in range(nodes):
                 local_controller = PIDController(0)
