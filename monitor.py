@@ -89,7 +89,7 @@ def get_active_pods():
     cmd = f"kubectl get pods --field-selector=status.phase!=Succeeded,status.phase!=Failed | wc -l"
     result = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     try:
-        if int(result):
-            return int(result)-1
+        if int(result.stdout):
+            return int(result.stdout)-1
     except Exception as e:
         return 0
