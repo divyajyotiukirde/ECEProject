@@ -7,4 +7,6 @@ COPY ./LocalController.py /app
 COPY ./middleware.py /app
 COPY ./monitor.py /app
 COPY ./processor.py /app
-CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0"]
+COPY ./script.sh /app
+RUN chmod +x /script.sh
+ENTRYPOINT ["/script.sh"]
