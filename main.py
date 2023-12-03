@@ -32,8 +32,6 @@ if __name__ == '__main__':
             global_controller.update_utilization(cpu)
             global_controller.run_controller()
             nodes = int(global_controller.get_number_of_nodes())
-            if cpu<0.8:
-                nodes=1
             print("number of nodes: ", nodes)
 
             for node in range(nodes):

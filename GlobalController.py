@@ -31,6 +31,8 @@ class GlobalPIDController():
         u = self.kp*err + self.i*self.ki + self.kd*self.d
         self.prev_e = err
         #print(u, yk)
+        if err>0:
+            return 1
         if u>2:
             # call to kill node
             return 2
@@ -63,6 +65,8 @@ class GlobalPIDController():
         if self.dead_node==1:
             return 2
         if self.dead_node==2:
+            return 1
+        if self.current_y<0.8:
             return 1
         return self.node
     
