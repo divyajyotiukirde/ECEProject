@@ -28,7 +28,7 @@ if __name__ == '__main__':
             'job': formatted_output
         }
         encoded_params = urlencode(params)
-        url = "http://127.0.0.1:5000/submit?" + encoded_params
+        url = "http://cloud-controller.com/submit?" + encoded_params
         print("Requesting... ", url)
         command = f"curl {url}"
         result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
