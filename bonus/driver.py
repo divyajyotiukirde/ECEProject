@@ -28,6 +28,8 @@ if __name__ == '__main__':
             'job': formatted_output
         }
         encoded_params = urlencode(params)
+        # http://cloud-controller.com
+        # http://127.0.0.1:5000
         url = "http://cloud-controller.com/submit?" + encoded_params
         print("Requesting... ", url)
         command = f"curl {url}"
