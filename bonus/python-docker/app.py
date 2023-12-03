@@ -11,6 +11,7 @@ def hello_world():
 @app.route('/submit', methods=['GET'])
 def submit_job():
     job_str = request.args.get('job')
+    cpu_str = request.args.get('cpu')
     job_scheduler.add_in_queue(job_str)
     job_scheduler.process_queue()
     return job_str + ' Job submitted!'

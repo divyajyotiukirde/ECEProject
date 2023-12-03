@@ -1,11 +1,18 @@
 import middleware
 from LocalController import PIDController
-import monitor
 
 class JobScheduler():
     def __init__( self ):
         self.job_queue = []
         self.job_id = 0
+
+        self.cluster_cpu = 0
+        self.node_cpu = []
+
+    def update_cpu(self, cpu_str):
+        cpu = cpu_str.split(',')
+        self.cluster_cpu = int(cpu[0])
+        self.node_cpu = cpu[1:]
 
     def add_in_queue(self,job):
         self.job_queue.append(job)
@@ -13,16 +20,15 @@ class JobScheduler():
     def process_queue(self):
 
         while True:
-            cpu = monitor.get_cluster_utilization()
+            cpu = self.cluster_cpu
             if cpu:
-                print("active pods: ", monitor.get_active_pods())
 
                 local_controller = PIDController(0)
                 curr_node = 1
                 if cpu > 0.8:
                     curr_node = 2
 
-                local_cpu = monitor.get_node_cpu_utilization(curr_node)
+                local_cpu = int(self.node_cpu[curr_node])
                 if local_cpu:
                     local_controller.update_utilization(local_cpu)
                     local_controller.run_controller()
