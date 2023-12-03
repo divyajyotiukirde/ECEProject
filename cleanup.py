@@ -10,6 +10,8 @@ def clean_pods():
     command = f"kubectl delete pod --field-selector=status.phase==Succeeded"
     result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     print(result.stdout)
+    command = f"rm stress-pod-*.yaml"
+    result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
 
 if __name__ == '__main__':

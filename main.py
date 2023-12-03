@@ -32,12 +32,15 @@ if __name__ == '__main__':
             global_controller.update_utilization(cpu)
             global_controller.run_controller()
             nodes = int(global_controller.get_number_of_nodes())
+            if cpu<0.8:
+                nodes=1
             print("number of nodes: ", nodes)
 
             for node in range(nodes):
                 local_controller = PIDController(0)
                 curr_node = node+1
                 # avoid assigning jobs to dead node
+                # check if node dead here
                 if nodes==1:
                     curr_node = global_controller.get_node()
                 local_cpu = monitor.get_node_cpu_utilization(curr_node)
