@@ -12,6 +12,7 @@ def hello_world():
 def submit_job():
     job_str = request.args.get('job')
     job_scheduler.add_in_queue(job_str)
+    job_scheduler.process_queue()
     return job_str + ' Job submitted!'
 
 @app.route('/stop', methods=['GET'])
@@ -19,5 +20,5 @@ def stop_job():
     return ' Job stopped!'
 
 # comment this when building docker image
-# if __name__ == '__main__':
-#     app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
