@@ -74,6 +74,8 @@ def get_cluster_utilization():
     node_metrics = node_response.json()
     cpu_capacity = 16000
     cpu = 0
+    if 'items' not in node_metrics:
+        return 0
     for i in range(len(node_metrics['items'])):
         if i==0:
             continue
