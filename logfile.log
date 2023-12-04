@@ -1,0 +1,3 @@
+2023-12-03 19:18:50,440 - root - INFO - This is an info message
+2023-12-03 19:18:50,440 - root - ERROR - This is an error message
+2023-12-03 19:18:50,440 - root - DEBUG - This is a debug message
