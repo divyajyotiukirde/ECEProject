@@ -1,3 +1,6 @@
+# Logging using STD-logging-library
+# This is a test file and to be added into mean.py 
+
 import logging
 import os
 
