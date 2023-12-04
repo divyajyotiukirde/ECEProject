@@ -76,3 +76,37 @@ sudo vi /etc/hosts
 ```
 128.110.217.71 	cloud-controller.com
 ```
+
+# Extra Credit - Logs from Fluentbit
+To install Fluentbit and run it as containers in node1 and node2.
+
+The installing command have beed added into Makefile:
+```bash
+sudo make
+```
+Create a configuration file for Fluent Bit, which is fluent-bit-config.yaml.
+Deploy Fluent Bit as a DaemonSet so that it runs on every node in your Kubernetes cluster by ceating fluent-bit-daemonset.yaml.
+Both files have beed added into repo.
+
+Get necessary permission to list events at the luster scope, fix role-based access control (RBAC) issue:
+Create a ClusterRole that grants access to the events resources. 
+Create a ClusterRoleBinding to grant the events-reader role to the default service account in the logging namespace.
+```bash
+kubectl apply -f events-clusterrole.yaml
+kubectl apply -f events-clusterrolebinding.yaml
+```
+
+Apply configure files.
+```bash
+kubectl create namespace logging
+kubectl apply -f fluent-bit-config.yaml
+kubectl apply -f fluent-bit-daemonset.yaml
+```
+To check, run command. It should show two pods running in node1 and node2.
+```bash
+kubectl get pods -n logging
+```
+To get logs, run command
+```bash
+sudo kubectl logs -n logging [Pod name, like fluent-bit-xxx]
+```
