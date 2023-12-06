@@ -24,7 +24,7 @@ For monitoring of cluster, execute:
 python3 start_monitor.py
 ```
 
-## Code Structure & Flow
+## Code Structure
   
 Files
 
@@ -32,7 +32,9 @@ Files
 - **start_monitor.py**: The driver code for monitoring. Should be started parallely.
 - **monitor.py**: The functions in these return the utlization metrics to feed to the Controllers.
 - **middleware.py**: The code that administrates pod creation.
-- **LocalController.py**: The Controller class 
+- **LocalController.py**: The Controller class for individual nodes.
+- **GlobalController.py**: The Controller class for the cluster.
+- **cleanup.py**: To cleanup the pods and enable nodes.
 
 # Extra Credit - REST APIs
 
