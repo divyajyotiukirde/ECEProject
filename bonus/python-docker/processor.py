@@ -1,15 +1,8 @@
 import middleware
 from LocalController import PIDController
 from collections import deque
-import logging
 import monitor
 
-
-# Configure logging
-logging.basicConfig(
-    level=logging.DEBUG,
-    format='[%(levelname)s] (%(threadName)-10s) %(message)s',
-)
 
 node_map = {
     1: "node1.group5project.ufl-eel6871-fa23-pg0.utah.cloudlab.us",
@@ -48,7 +41,7 @@ class JobScheduler():
     def process_queue(self):
         if self.is_processing==True:
             return
-        logging.debug("job id %d", self.job_id)
+        self.is_processing = True
         while len(self.job_queue):
             cpu = monitor.get_cluster_utilization()
             if cpu:
@@ -82,7 +75,6 @@ class JobScheduler():
 
                     if pods > len(self.job_queue):
                         for job in self.job_queue:
-                            logging.debug("job id %d", self.job_id)
                             if self.job_id >= len(self.job_queue):
                                 break
                             job = job.strip()
@@ -99,7 +91,6 @@ class JobScheduler():
                     else:
                         count=0
                         while self.job_id < len(self.job_queue):
-                            logging.debug("job id %d", self.job_id)
                             if self.job_id >= len(self.job_queue):
                                 break
                             if pods==count:

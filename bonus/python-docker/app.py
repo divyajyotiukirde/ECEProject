@@ -21,7 +21,6 @@ def submit_job():
         return job_str + ' Job added to queue!'
     if not job_scheduler.is_processing:
         job_scheduler.process_queue()
-        job_scheduler.is_processing = True
     return job_str + ' Job submitted!'
 
 @app.route('/api/stop', methods=['GET'])
