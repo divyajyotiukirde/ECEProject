@@ -50,8 +50,8 @@ if __name__ == '__main__':
                 print("Stop jobs, no nodes available")
                 # sleep for 5 mins
                 print("respawning")
-                middleware.restart_node(node_map[1])
-                middleware.restart_node(node_map[2])
+                middleware.restart_node(1)
+                middleware.restart_node(2)
                 time.sleep(300)
                 # exit(0)
 
