@@ -13,8 +13,6 @@ def hello_world():
 def submit_job():
     job_str = request.args.get('job')
     cpu_str = request.args.get('cpu')
-    print("Job desc: ", job_str)
-    print("CPU stats: ", cpu_str)
     job_scheduler.update_cpu(cpu_str)
     if job_scheduler.is_queue_empty():
         job_scheduler.add_in_queue(job_str)

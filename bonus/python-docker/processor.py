@@ -1,6 +1,13 @@
 import middleware
 from LocalController import PIDController
 from collections import deque
+import logging
+
+# Configure logging
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='[%(levelname)s] (%(threadName)-10s) %(message)s',
+)
 
 class JobScheduler():
     def __init__( self ):
@@ -30,7 +37,7 @@ class JobScheduler():
         return True if len(self.job_queue)==0 else False
 
     def process_queue(self):
-
+        logging.debug("job id ", self.job_id)
         while len(self.job_queue):
             cpu = self.cluster_cpu
             if cpu:
