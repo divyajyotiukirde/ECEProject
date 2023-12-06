@@ -49,9 +49,11 @@ if __name__ == '__main__':
             if not monitor.is_node_active(node_map[1]) and not monitor.is_node_active(node_map[2]):
                 print("Stop jobs, no nodes available")
                 # sleep for 5 mins
-                time.sleep(300)
+                print("respawning")
                 middleware.restart_node(node_map[1])
                 middleware.restart_node(node_map[2])
+                time.sleep(300)
+                # exit(0)
 
             for node in range(nodes):
                 local_controller = local_controller_store[node]
@@ -93,6 +95,9 @@ if __name__ == '__main__':
                             # start pod on curr_node
                             middleware.start_pod(formatted_output, curr_node)
                             time.sleep(15) # process jobs after every 15s
+                            local_cpu = monitor.get_node_cpu_utilization(curr_node)
+                            if local_cpu:
+                                print("cpu util for node ", curr_node, " is ", local_cpu)
                             job_id+=1
                     else:
                         count=0
@@ -108,6 +113,9 @@ if __name__ == '__main__':
                             # start pod on curr_node
                             middleware.start_pod(formatted_output, curr_node)
                             time.sleep(15) # process jobs after every 15s
+                            local_cpu = monitor.get_node_cpu_utilization(curr_node)
+                            if local_cpu:
+                                print("cpu util for node ", curr_node, " is ", local_cpu)
                             count+=1
                             job_id+=1
                     

@@ -68,9 +68,9 @@ def kill_node(node):
     
 def restart_node(node):
     node_name = node_map[node]
-    command = f"kubectl drain {node_name}"
-    result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    print("drained node", node_name,result.stdout)
+    # command = "kubectl get pods --no-headers=true | grep '^stress-pod' | awk '{print $1}' | xargs kubectl delete pod"
+    # result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    # print("drained node", node_name,result.stdout)
     command = f"kubectl uncordon {node_name}"
     result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     print("restarted node", node_name,result.stdout)
