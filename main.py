@@ -24,6 +24,12 @@ if __name__ == '__main__':
 
     global_controller = GlobalPIDController(0)
 
+    total_nodes = 2
+    local_controller_store = []
+    for node in range(total_nodes):
+        controller_instance = PIDController(0)
+        local_controller_store.append(controller_instance)
+
     job_id = 0
 
     while True:
@@ -36,7 +42,7 @@ if __name__ == '__main__':
             print("active pods: ", monitor.get_active_pods())
 
             for node in range(nodes):
-                local_controller = PIDController(0)
+                local_controller = local_controller_store[node]
                 curr_node = node+1
                 # avoid assigning jobs to dead node
                 # check if node dead here
