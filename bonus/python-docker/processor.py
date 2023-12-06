@@ -11,6 +11,11 @@ logging.basicConfig(
     format='[%(levelname)s] (%(threadName)-10s) %(message)s',
 )
 
+node_map = {
+    1: "node1.group5project.ufl-eel6871-fa23-pg0.utah.cloudlab.us",
+    2: "node2.group5project.ufl-eel6871-fa23-pg0.utah.cloudlab.us"
+}
+
 class JobScheduler():
     def __init__( self ):
         self.job_queue = deque()
