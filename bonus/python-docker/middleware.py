@@ -4,6 +4,15 @@
 import subprocess
 import time
 
+import logging
+
+# Configure logging
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='[%(levelname)s] (%(threadName)-10s) %(message)s',
+)
+
+
 node_map = {
     1: "node1.group5project.ufl-eel6871-fa23-pg0.utah.cloudlab.us",
     2: "node2.group5project.ufl-eel6871-fa23-pg0.utah.cloudlab.us"
@@ -55,6 +64,7 @@ def start_pod(args, node):
     time.sleep(2)
     result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     print("executed ",result.stdout)
+    logging.debug(result.stdout)
 
 
 def kill_pod():
