@@ -98,7 +98,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 ### Add the External IP from the ingress-controller
 
 ```
-$ kubectl get service ingress-nginx-controller --namespace=ingress-ngin
+$ kubectl get service ingress-nginx-controller --namespace=ingress-nginx
 $ kubectl get ingress
 ```
 

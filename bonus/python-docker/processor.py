@@ -2,6 +2,8 @@ import middleware
 from LocalController import PIDController
 from collections import deque
 import logging
+import monitor
+
 
 # Configure logging
 logging.basicConfig(
@@ -43,14 +45,26 @@ class JobScheduler():
             return
         logging.debug("job id %d", self.job_id)
         while len(self.job_queue):
-            cpu = self.cluster_cpu
+            cpu = monitor.get_cluster_utilization()
             if cpu:
                 curr_node = 1
-                if cpu > 0.8:
+
+                if not monitor.is_node_active(node_map[1]) and not monitor.is_node_active(node_map[2]):
+                    print("Stop jobs, no nodes available")
+                    # sleep for 5 mins
+                    print("respawning")
+                    
+                    middleware.restart_node(1)
+                    middleware.restart_node(2)
+
+                if cpu>0.8:
+                    middleware.kill_node(curr_node)
+                    print("kill node"+str(curr_node))
+                    #print("global controller kill node"+str(curr_node))
                     curr_node = 2
                 local_controller = self.local_controller_store[curr_node-1]
 
-                local_cpu = float(self.node_cpu[curr_node])
+                local_cpu = monitor.get_node_cpu_utilization(curr_node)
                 if local_cpu:
                     local_controller.update_utilization(local_cpu)
                     local_controller.run_controller()
@@ -71,6 +85,11 @@ class JobScheduler():
                             # o/p example "--io", "4", "--vm", "5", "--vm-bytes", "2G", "--timeout", "5m"
                             # start pod on curr_node
                             middleware.start_pod(job, curr_node)
+                            if local_cpu:
+                                print("cpu util for node ", curr_node, " is ", local_cpu)
+                                #print("cpu util for node"+str(curr_node)+"is"+str(local_cpu))
+                                if local_cpu>0.8:
+                                    break
                             self.job_id+=1
                     else:
                         count=0
@@ -84,8 +103,14 @@ class JobScheduler():
                             job = job.strip()
                             # start pod on curr_node
                             middleware.start_pod(job, curr_node)
+                            if local_cpu:
+                                print("cpu util for node ", curr_node, " is ", local_cpu)
+                                #print("cpu util for node"+str(curr_node)+"is"+str(local_cpu))
+                                if local_cpu>0.8:
+                                    break
                             count+=1
                             self.job_id+=1
                     if curr_node==2 and pods>2:
+                        self.is_processing = False
                         exit(0)
         self.is_processing = False
