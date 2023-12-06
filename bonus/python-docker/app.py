@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from processor import JobScheduler
-#import threading
+import threading
 
 job_scheduler = JobScheduler()
 app = Flask(__name__)
@@ -14,13 +14,13 @@ def submit_job():
     job_str = request.args.get('job')
     if job_scheduler.is_queue_empty():
         job_scheduler.add_in_queue(job_str)
-        #task = threading.Thread(group=None, target=job_scheduler.process_queue)
-        #task.start()
     else:
         job_scheduler.add_in_queue(job_str)
         return job_str + ' Job added to queue!'
     if not job_scheduler.is_processing:
-        job_scheduler.process_queue()
+        task = threading.Thread(group=None, target=job_scheduler.process_queue)
+        task.start()
+        #job_scheduler.process_queue()
     return job_str + ' Job submitted!'
 
 @app.route('/api/stop', methods=['GET'])

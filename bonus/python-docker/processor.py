@@ -2,6 +2,7 @@ import middleware
 from LocalController import PIDController
 from collections import deque
 import monitor
+import time
 
 
 node_map = {
@@ -70,13 +71,8 @@ class JobScheduler():
                     print("node: ", curr_node)
                     print("number of pods: ", pods)
 
-                    if self.job_id >= len(self.job_queue):
-                        exit(0)
-
                     if pods > len(self.job_queue):
                         for job in self.job_queue:
-                            if self.job_id >= len(self.job_queue):
-                                break
                             job = job.strip()
                             # i/p example stress-ng --io 4 --vm 5 --vm-bytes 2G --timeout 5m
                             # o/p example "--io", "4", "--vm", "5", "--vm-bytes", "2G", "--timeout", "5m"
@@ -88,11 +84,10 @@ class JobScheduler():
                                 if local_cpu>0.8:
                                     break
                             self.job_id+=1
+                            time.sleep(15)
                     else:
                         count=0
                         while self.job_id < len(self.job_queue):
-                            if self.job_id >= len(self.job_queue):
-                                break
                             if pods==count:
                                 break
                             job = self.job_queue[self.job_id]
@@ -106,6 +101,7 @@ class JobScheduler():
                                     break
                             count+=1
                             self.job_id+=1
+                            time.sleep(15)
                     if curr_node==2 and pods>2:
                         self.is_processing = False
                         exit(0)
