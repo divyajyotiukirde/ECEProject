@@ -46,6 +46,14 @@ if __name__ == '__main__':
                 curr_node = node+1
                 # avoid assigning jobs to dead node
                 # check if node dead here
+                if curr_node==1 and monitor.get_node_status(curr_node):
+                    curr_node = 2
+                elif curr_node==2 and monitor.get_node_status(curr_node):
+                    curr_node = 1
+                if cpu>0.8:
+                    middleware.kill_node(curr_node)
+                    global_controller.kill_node(curr_node)
+                    curr_node = global_controller.get_node()
                 if nodes==1:
                     curr_node = global_controller.get_node()
                 local_cpu = monitor.get_node_cpu_utilization(curr_node)

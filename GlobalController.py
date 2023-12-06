@@ -33,14 +33,11 @@ class GlobalPIDController():
         print(u, yk)
         if err>0:
             return 1
-        if u>2:
-            # call to kill node
-            return 2
+        if u<1:
+            return 1
         if u>self.max_nodes:
             self.max_nodes = u
             return self.max_nodes
-        if u<1:
-            return 1
         return u
     
     def _get_utilization(self):
