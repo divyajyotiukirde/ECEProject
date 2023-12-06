@@ -1,5 +1,38 @@
 # ECEProject
 
+# Execution
+
+To execute the Task 3 code:
+
+Clone this repository and cd into the directory.
+
+Start the proxy server. Our metrics server depends on it.
+
+```
+kubectl proxy &
+```
+
+```
+python3 main.py <job_simulation_file.txt>
+```
+
+Make sure to run `cleanup.py` before and after executing the above main file, to cleanup and make nodes active.
+
+For monitoring of cluster, execute:
+
+```
+python3 start_monitor.py
+```
+
+## Code Structure & Flow
+  
+Files
+
+- **main.py**: This is start of the program. It starts the job scheduling and Global controller takes over for assignment of jobs.
+- **start_monitor.py**: The driver code for monitoring. Should be started parallely.
+- **monitor.py**: The functions in these return the utlization metrics to feed to the Controllers.
+- **middleware.py**: The code that administrates pod creation.
+- **LocalController.py**: The Controller class 
 
 # Extra Credit - REST APIs
 
