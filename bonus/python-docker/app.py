@@ -9,9 +9,10 @@ app = Flask(__name__)
 def hello_world():
     return 'Hello, Docker!'
 
-@app.route('/api/start', methods=['GET'])
+@app.route('/api/start')
 def start_scheduler():
     job_scheduler.process_queue()
+    return 'Job queue started'
 
 @app.route('/api/submit', methods=['GET'])
 def submit_job():

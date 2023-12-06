@@ -24,6 +24,5 @@ def enable_nodes():
 
 
 if __name__ == '__main__':
-    while True:
-        clean_pods()
-        enable_nodes()
+    clean_pods()
+    enable_nodes()
