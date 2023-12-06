@@ -23,6 +23,14 @@ install-python-packages:
 	pip install requests
 	pip install kubernetes
 
+# Target for installing the metrics-server
+install-metrics-server:
+	kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+
+# Target for starting kubectl proxy
+start-kubectl-proxy:
+	kubectl proxy &
+
 # Target for cleaning up
 clean:
 	rm -f $(OBJS) $(TARGET)

@@ -1,3 +1,80 @@
-2023-12-03 19:18:50,440 - root - INFO - This is an info message
-2023-12-03 19:18:50,440 - root - ERROR - This is an error message
-2023-12-03 19:18:50,440 - root - DEBUG - This is a debug message
+2023-12-06 14:30:13,841 - root - INFO - Job Files:job.txt
+2023-12-06 14:30:13,841 - root - INFO - Successfully Read Job Files
+2023-12-06 14:30:13,841 - root - INFO - total_nodes = 2
+2023-12-06 14:30:13,841 - root - INFO - local_controller_store:[<LocalController.PIDController object at 0x7f8b514129e0>, <LocalController.PIDController object at 0x7f8b500bc160>]
+2023-12-06 14:30:14,068 - root - INFO - number of nodes: 1
+2023-12-06 14:30:14,068 - root - INFO - active pods: 3
+2023-12-06 14:30:14,244 - root - INFO - node:1
+2023-12-06 14:30:14,244 - root - INFO - number of nodes3
+2023-12-06 14:30:16,668 - root - INFO - start new pods1
+2023-12-06 14:30:31,695 - root - INFO - cpu util for node1is0.0097110198125
+2023-12-06 14:30:34,143 - root - INFO - start new pods1
+2023-12-06 14:30:49,169 - root - INFO - cpu util for node1is0.0690861281875
+2023-12-06 14:30:51,637 - root - INFO - start new pods1
+2023-12-06 14:31:06,662 - root - INFO - cpu util for node1is0.232761186625
+2023-12-06 14:31:06,898 - root - INFO - number of nodes: 1
+2023-12-06 14:31:06,898 - root - INFO - active pods: 6
+2023-12-06 14:31:07,033 - root - INFO - node:1
+2023-12-06 14:31:07,033 - root - INFO - number of nodes7
+2023-12-06 14:31:09,446 - root - INFO - start new pods1
+2023-12-06 14:31:24,471 - root - INFO - cpu util for node1is0.30073969618749996
+2023-12-06 14:31:27,049 - root - INFO - start new pods1
+2023-12-06 14:31:42,074 - root - INFO - cpu util for node1is0.33011994443750003
+2023-12-06 14:31:44,550 - root - INFO - start new pods1
+2023-12-06 14:31:59,574 - root - INFO - cpu util for node1is0.3229341909375
+2023-12-06 14:32:02,042 - root - INFO - start new pods1
+2023-12-06 14:32:17,057 - root - INFO - cpu util for node1is0.484758216625
+2023-12-06 14:32:19,533 - root - INFO - start new pods1
+2023-12-06 14:32:34,558 - root - INFO - cpu util for node1is0.5828090165625001
+2023-12-06 14:32:37,018 - root - INFO - start new pods1
+2023-12-06 14:32:52,045 - root - INFO - cpu util for node1is0.8643044165
+2023-12-06 14:32:52,281 - root - INFO - number of nodes: 1
+2023-12-06 14:32:52,281 - root - INFO - active pods: 6
+2023-12-06 14:32:52,599 - root - INFO - kill node1
+2023-12-06 14:32:52,599 - root - INFO - global controller kill node1
+2023-12-06 14:32:52,608 - root - INFO - node:2
+2023-12-06 14:32:52,608 - root - INFO - number of nodes12
+2023-12-06 14:32:55,076 - root - INFO - start new pods2
+2023-12-06 14:33:10,102 - root - INFO - cpu util for node2is0.1068807339375
+2023-12-06 14:33:12,553 - root - INFO - start new pods2
+2023-12-06 14:33:27,579 - root - INFO - cpu util for node2is0.269736187125
+2023-12-06 14:33:30,017 - root - INFO - start new pods2
+2023-12-06 14:33:45,043 - root - INFO - cpu util for node2is0.5391702211875
+2023-12-06 14:33:47,517 - root - INFO - start new pods2
+2023-12-06 14:34:02,543 - root - INFO - cpu util for node2is0.7675138723125
+2023-12-06 14:34:04,934 - root - INFO - start new pods2
+2023-12-06 14:34:19,959 - root - INFO - cpu util for node2is0.8527358256875
+2023-12-06 14:34:20,163 - root - INFO - number of nodes: 1
+2023-12-06 14:34:20,163 - root - INFO - active pods: 6
+2023-12-06 14:34:20,394 - root - INFO - curr_node2
+2023-12-06 14:34:20,509 - root - INFO - kill node2
+2023-12-06 14:34:20,510 - root - INFO - global controller kill node2
+2023-12-06 14:34:20,517 - root - INFO - node:1
+2023-12-06 14:34:20,518 - root - INFO - number of nodes18
+2023-12-06 14:34:22,978 - root - INFO - start new pods1
+2023-12-06 14:34:38,004 - root - INFO - cpu util for node1is0.013341584125
+2023-12-06 14:34:40,507 - root - INFO - start new pods1
+2023-12-06 14:34:55,522 - root - INFO - cpu util for node1is0.012149948125
+2023-12-06 14:34:57,992 - root - INFO - start new pods1
+2023-12-06 14:35:13,018 - root - INFO - cpu util for node1is0.0198326235
+2023-12-06 14:35:15,492 - root - INFO - start new pods1
+2023-12-06 14:35:30,519 - root - INFO - cpu util for node1is0.011667819
+2023-12-06 14:35:33,007 - root - INFO - start new pods1
+2023-12-06 14:35:48,034 - root - INFO - cpu util for node1is0.0125965155
+2023-12-06 14:35:50,532 - root - INFO - start new pods1
+2023-12-06 14:36:05,558 - root - INFO - cpu util for node1is0.0120710935
+2023-12-06 14:36:08,016 - root - INFO - start new pods1
+2023-12-06 14:36:23,041 - root - INFO - cpu util for node1is0.0115004935625
+2023-12-06 14:36:25,542 - root - INFO - start new pods1
+2023-12-06 14:36:40,567 - root - INFO - cpu util for node1is0.0124690746875
+2023-12-06 14:36:43,045 - root - INFO - start new pods1
+2023-12-06 14:36:58,071 - root - INFO - cpu util for node1is0.011319869625000001
+2023-12-06 14:37:00,553 - root - INFO - start new pods1
+2023-12-06 14:37:15,578 - root - INFO - cpu util for node1is0.0156373713125
+2023-12-06 14:37:18,042 - root - INFO - start new pods1
+2023-12-06 14:37:33,066 - root - INFO - cpu util for node1is0.0121729293125
+2023-12-06 14:37:35,579 - root - INFO - start new pods1
+2023-12-06 14:37:50,606 - root - INFO - cpu util for node1is0.013707118749999999
+2023-12-06 14:37:53,136 - root - INFO - start new pods1
+2023-12-06 14:38:08,163 - root - INFO - cpu util for node1is0.0121593395625
+2023-12-06 14:38:10,630 - root - INFO - start new pods1
