@@ -23,6 +23,8 @@ class JobScheduler():
             controller_instance = PIDController(0)
             self.local_controller_store.append(controller_instance)
 
+        self.is_processing = False
+
     def update_cpu(self, cpu_str):
         if len(cpu_str):
             cpu = cpu_str.split(',')
@@ -37,6 +39,8 @@ class JobScheduler():
         return True if len(self.job_queue)==0 else False
 
     def process_queue(self):
+        if self.is_processing==True:
+            return
         logging.debug("job id %d", self.job_id)
         while len(self.job_queue):
             cpu = self.cluster_cpu
@@ -84,3 +88,4 @@ class JobScheduler():
                             self.job_id+=1
                     if curr_node==2 and pods>2:
                         exit(0)
+        self.is_processing = False

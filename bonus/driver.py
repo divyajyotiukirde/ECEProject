@@ -35,8 +35,7 @@ if __name__ == '__main__':
         job = job.strip()
         formatted_output = parse_args(job)
         params = {
-            'job': formatted_output,
-            'cpu': cpu_info
+            'job': formatted_output
         }
         encoded_params = urlencode(params)
         urlprefix = "http://cloud-controller.com/api/submit?"

@@ -12,16 +12,16 @@ def hello_world():
 @app.route('/api/submit', methods=['GET'])
 def submit_job():
     job_str = request.args.get('job')
-    cpu_str = request.args.get('cpu')
-    job_scheduler.update_cpu(cpu_str)
     if job_scheduler.is_queue_empty():
         job_scheduler.add_in_queue(job_str)
-        job_scheduler.process_queue()
         #task = threading.Thread(group=None, target=job_scheduler.process_queue)
         #task.start()
     else:
         job_scheduler.add_in_queue(job_str)
         return job_str + ' Job added to queue!'
+    if not job_scheduler.is_processing:
+        job_scheduler.process_queue()
+        job_scheduler.is_processing = True
     return job_str + ' Job submitted!'
 
 @app.route('/api/stop', methods=['GET'])
