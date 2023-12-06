@@ -46,6 +46,13 @@ if __name__ == '__main__':
             print("number of nodes: ", nodes)
             print("active pods: ", monitor.get_active_pods())
 
+            if not monitor.is_node_active(node_map[1]) and not monitor.is_node_active(node_map[2]):
+                print("Stop jobs, no nodes available")
+                # sleep for 5 mins
+                time.sleep(300)
+                middleware.restart_node(node_map[1])
+                middleware.restart_node(node_map[2])
+
             for node in range(nodes):
                 local_controller = local_controller_store[node]
                 curr_node = node+1
@@ -69,6 +76,7 @@ if __name__ == '__main__':
                     pods = int(local_controller.get_number_of_pods())
                     print("node: ", curr_node)
                     print("number of pods: ", pods)
+
 
                     if job_id >= len(jobs):
                         exit(0)
