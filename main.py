@@ -98,6 +98,8 @@ if __name__ == '__main__':
                             local_cpu = monitor.get_node_cpu_utilization(curr_node)
                             if local_cpu:
                                 print("cpu util for node ", curr_node, " is ", local_cpu)
+                                if local_cpu>0.8:
+                                    break
                             job_id+=1
                     else:
                         count=0
@@ -116,6 +118,8 @@ if __name__ == '__main__':
                             local_cpu = monitor.get_node_cpu_utilization(curr_node)
                             if local_cpu:
                                 print("cpu util for node ", curr_node, " is ", local_cpu)
+                                if local_cpu>0.8:
+                                    break
                             count+=1
                             job_id+=1
                     

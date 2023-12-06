@@ -60,7 +60,6 @@ def get_cpu_utilization():
         # Fetch Node metrics
         node_response = requests.get(node_metrics_url)
         node_metrics = node_response.json()
-        get_node_status()
         process_node_metrics(node_metrics)
 
     except requests.RequestException as e:
