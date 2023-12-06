@@ -52,9 +52,9 @@ if __name__ == '__main__':
                 # avoid assigning jobs to dead node
                 # check if node dead here
                 node_name = node_map[curr_node]
-                if curr_node==1 and monitor.get_node_status(node_name):
+                if curr_node==1 and not monitor.is_node_active(node_name):
                     curr_node = 2
-                elif curr_node==2 and monitor.get_node_status(node_name):
+                elif curr_node==2 and not monitor.is_node_active(node_name):
                     curr_node = 1
                 if cpu>0.8:
                     middleware.kill_node(curr_node)

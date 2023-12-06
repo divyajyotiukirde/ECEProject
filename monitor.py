@@ -17,7 +17,7 @@ def get_pod_status():
     except Exception as e:
         print(f"Error fetching pod status: {e}")
 
-def get_node_status(node_name):
+def is_node_active(node_name):
     config.load_kube_config()
     v1 = client.CoreV1Api()
     node = v1.read_node(node_name)
