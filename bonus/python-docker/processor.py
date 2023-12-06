@@ -1,13 +1,20 @@
 import middleware
 from LocalController import PIDController
+from collections import deque
 
 class JobScheduler():
     def __init__( self ):
-        self.job_queue = []
+        self.job_queue = deque()
         self.job_id = 0
 
         self.cluster_cpu = 0
         self.node_cpu = []
+
+        self.local_controller_store = []
+        total_nodes = 2
+        for _ in range(total_nodes):
+            controller_instance = PIDController(0)
+            self.local_controller_store.append(controller_instance)
 
     def update_cpu(self, cpu_str):
         cpu = cpu_str.split(',')
@@ -17,16 +24,18 @@ class JobScheduler():
     def add_in_queue(self,job):
         self.job_queue.append(job)
 
+    def is_queue_empty(self):
+        return True if len(self.job_queue)==0 else False
+
     def process_queue(self):
 
-        while True:
+        while len(self.job_queue):
             cpu = self.cluster_cpu
             if cpu:
-
-                local_controller = PIDController(0)
                 curr_node = 1
                 if cpu > 0.8:
                     curr_node = 2
+                local_controller = self.local_controller_store[curr_node-1]
 
                 local_cpu = float(self.node_cpu[curr_node])
                 if local_cpu:

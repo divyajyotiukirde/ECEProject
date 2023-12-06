@@ -83,9 +83,9 @@ def get_cluster_utilization():
         node_name = item['metadata']['name']
         cpu_usage_nano = int(item['usage']['cpu'].rstrip('n'))
         cpu_usage_milli = cpu_usage_nano / 1e6  # Convert nanocores to millicores
-        cpu += (cpu_usage_milli/cpu_capacity)
+        cpu = max(cpu_usage_milli/cpu_capacity, cpu)
     # return overall
-    return cpu/2
+    return cpu
 
 def get_active_pods():
     cmd = f"kubectl get pods --field-selector=status.phase!=Succeeded,status.phase!=Failed | wc -l"
