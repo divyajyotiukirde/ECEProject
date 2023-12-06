@@ -7,6 +7,11 @@ from LocalController import PIDController
 from GlobalController import GlobalPIDController
 import monitor
 
+node_map = {
+    1: "node1.group5project.ufl-eel6871-fa23-pg0.utah.cloudlab.us",
+    2: "node2.group5project.ufl-eel6871-fa23-pg0.utah.cloudlab.us"
+}
+
 def parse_args(job):
     elements = job.split()
     pairs = [(elements[i], elements[i + 1]) for i in range(1, len(elements), 2)]
@@ -46,9 +51,10 @@ if __name__ == '__main__':
                 curr_node = node+1
                 # avoid assigning jobs to dead node
                 # check if node dead here
-                if curr_node==1 and monitor.get_node_status(curr_node):
+                node_name = node_map[curr_node]
+                if curr_node==1 and monitor.get_node_status(node_name):
                     curr_node = 2
-                elif curr_node==2 and monitor.get_node_status(curr_node):
+                elif curr_node==2 and monitor.get_node_status(node_name):
                     curr_node = 1
                 if cpu>0.8:
                     middleware.kill_node(curr_node)
