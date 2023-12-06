@@ -30,7 +30,7 @@ if __name__ == '__main__':
     job_id = 0
 
     for job in jobs:
-        print("on job id: ", job_id)
+        print("Job id: ", job_id)
         cpu_info = get_cpu_info()
         job = job.strip()
         formatted_output = parse_args(job)

@@ -37,7 +37,7 @@ class JobScheduler():
         return True if len(self.job_queue)==0 else False
 
     def process_queue(self):
-        logging.debug("job id ", self.job_id)
+        logging.debug("job id %d", self.job_id)
         while len(self.job_queue):
             cpu = self.cluster_cpu
             if cpu:
@@ -59,7 +59,7 @@ class JobScheduler():
 
                     if pods > len(self.job_queue):
                         for job in self.job_queue:
-                            print("on job id: ", self.job_id)
+                            logging.debug("job id %d", self.job_id)
                             if self.job_id >= len(self.job_queue):
                                 break
                             job = job.strip()
@@ -71,7 +71,7 @@ class JobScheduler():
                     else:
                         count=0
                         while self.job_id < len(self.job_queue):
-                            print("on job id: ", self.job_id)
+                            logging.debug("job id %d", self.job_id)
                             if self.job_id >= len(self.job_queue):
                                 break
                             if pods==count:
