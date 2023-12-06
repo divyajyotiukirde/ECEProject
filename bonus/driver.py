@@ -39,11 +39,12 @@ if __name__ == '__main__':
             'cpu': cpu_info
         }
         encoded_params = urlencode(params)
-        # http://cloud-controller.com
-        # http://127.0.0.1:5000
-        url = "http://cloud-controller.com/api/submit?" + encoded_params
+        urlprefix = "http://cloud-controller.com/api/submit?"
+        #urlprefix = "http://127.0.0.1:5000/api/submit?"
+        #urlprefix = "http://172.17.0.5:5000/api/submit?"
+        url = urlprefix + encoded_params
         print("Requesting... ", url)
-        command = f"curl {url}"
+        command = f'curl "{url}"'
         result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         print(result.stdout)
         time.sleep(15)
