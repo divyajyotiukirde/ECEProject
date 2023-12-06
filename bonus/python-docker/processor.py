@@ -17,9 +17,11 @@ class JobScheduler():
             self.local_controller_store.append(controller_instance)
 
     def update_cpu(self, cpu_str):
-        cpu = cpu_str.split(',')
-        self.cluster_cpu = float(cpu[0])
-        self.node_cpu = cpu[1:]
+        if len(cpu_str):
+            cpu = cpu_str.split(',')
+            if len(cpu)>=2:
+                self.cluster_cpu = float(cpu[0])
+                self.node_cpu = cpu[1:]
 
     def add_in_queue(self,job):
         self.job_queue.append(job)

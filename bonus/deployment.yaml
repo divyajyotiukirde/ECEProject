@@ -51,7 +51,7 @@ spec:
   - host: cloud-controller.com
     http:
       paths:
-      - path: /
+      - path: /api
         pathType: Prefix  
         backend:
           service:

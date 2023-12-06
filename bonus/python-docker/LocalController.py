@@ -29,11 +29,11 @@ class PIDController():
         u = self.kp*err + self.i*self.ki + self.kd*self.d
         self.prev_e = err
         #print(u, yk)
+        if u<1:
+            return 1
         if u>self.max_pods:
             self.max_pods = u
             return self.max_pods
-        if u<1:
-            return 1
         return u
     
     def _get_utilization(self):
