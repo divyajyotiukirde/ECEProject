@@ -112,6 +112,16 @@ sudo vi /etc/hosts
 128.110.217.71 	cloud-controller.com
 ```
 
+### Execution
+
+```
+kubectl apply -f deployment.yaml
+```
+
+```
+python3 driver.py <job.txt>
+```
+
 # Extra Credit - Logs from Fluentbit
 To install Fluentbit and run it as containers in node1 and node2.
 
