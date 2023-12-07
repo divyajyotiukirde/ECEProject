@@ -1,0 +1,16 @@
+stress-ng --io 1 --vm 1 --vm-bytes 128M
+stress-ng --io 1 --vm 2 --vm-bytes 512M
+stress-ng --io 2 --vm 1 --vm-bytes 512M
+stress-ng --io 2 --vm 2 --vm-bytes 768M
+stress-ng --io 1 --vm 3 --vm-bytes 768M
+stress-ng --io 2 --vm 3 --vm-bytes 1G
+stress-ng --io 1 --vm 4 --vm-bytes 1G
+stress-ng --io 2 --vm 4 --vm-bytes 1G
+stress-ng --io 1 --vm 5 --vm-bytes 2G
+stress-ng --io 2 --vm 5 --vm-bytes 2G
+stress-ng --io 1 --vm 6 --vm-bytes 3G
+stress-ng --io 2 --vm 6 --vm-bytes 3G
+stress-ng --io 1 --vm 7 --vm-bytes 4G
+stress-ng --io 2 --vm 7 --vm-bytes 4G
+stress-ng --io 1 --vm 8 --vm-bytes 4G
+stress-ng --io 2 --vm 8 --vm-bytes 4G
